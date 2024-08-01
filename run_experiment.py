@@ -11,17 +11,19 @@ from experiment import get_problem, get_algorithm, run_experiment
 Config.warnings["not_compiled"] = False
 
 parser = argparse.ArgumentParser(
-    prog='MOEAW',
-    description='Run experiments')
-parser.add_argument('-a', '--algorithm', type=str, default='NSGA2')
-parser.add_argument('-p', '--problem', type=str, default='DASCMOP7')
+    prog="MOEAW",
+    description="Run experiments"
+)
+parser.add_argument("-a", "--algorithm", type=str, default="NSGA2")
+parser.add_argument("-p", "--problem", type=str, default="DLTZ2")
+parser.add_argument("-t", "--trial", type=int, default=10)
 
 args = parser.parse_args()
 algorithm_name = args.algorithm
 problem_name = args.problem
-n_trial = 10
+n_trial = args.trial
 
-settings = json.load(open(".results/settings.json", "r"))[problem_name]
+settings = json.load(open("config/settings.json", "r"))[problem_name]
 
 for n_var, n_obj, difficulty, n_gen, n_partitions in zip(
         settings["n_var"],

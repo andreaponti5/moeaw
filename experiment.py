@@ -90,6 +90,7 @@ def run_experiment(
     res_df = pd.DataFrame(res.algorithm.callback.data)
     res_df["gen"] = range(len(res_df))
     res_df = res_df.explode(["X", "F", "CV"]).reset_index(drop=True)
+    # Uncomment this if you want to save also the Xs
     # x_data = pd.DataFrame(res_df["X"].tolist())
     # x_data.columns = [f"x_{col}" for col in x_data.columns]
     y_data = pd.DataFrame(res_df["F"].tolist())
