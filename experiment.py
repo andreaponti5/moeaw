@@ -13,6 +13,7 @@ from pymoo.util.ref_dirs import get_reference_directions
 
 from algorithms.moead import MOEAD
 from algorithms.moeadw import MOEADW
+from algorithms.sensor_crossover import SensorCrossover
 from algorithms.wselection import WSelection
 
 
@@ -51,6 +52,53 @@ def get_algorithm(
         return NSGA2(
             pop_size=len(ref_dirs),
             selection=WSelection(),
+            seed=seed
+        )
+
+
+def get_algorithm_osp(
+        name: str,
+        n_obj: int,
+        n_partitions: int,
+        seed: Optional[int] = None
+) -> GeneticAlgorithm:
+    ref_dirs = get_reference_directions(
+        "uniform",
+        n_obj,
+        n_partitions=n_partitions,
+        seed=seed
+    )
+    if name == "MOEAD":
+        return MOEAD(
+            ref_dirs,
+            n_neighbors=15,
+            prob_neighbor_mating=0.7,
+            crossover=SensorCrossover(),
+            seed=seed
+        )
+    if name == "MOEADW":
+        return MOEADW(
+            ref_dirs,
+            n_neighbors=15,
+            prob_neighbor_mating=0.7,
+            crossover=SensorCrossover(),
+            seed=seed
+        )
+    if name == "NSGA2":
+        return NSGA2(
+            pop_size=len(ref_dirs),
+            crossover=SensorCrossover(),
+            seed=seed
+        )
+    if name == "NSGA2W":
+        if n_obj == 2:
+            selection = WSelection(cloud_keys=["SF"])
+        else:
+            selection = WSelection(cloud_keys=["SF1", "SF2"])
+        return NSGA2(
+            pop_size=len(ref_dirs),
+            selection=selection,
+            crossover=SensorCrossover(),
             seed=seed
         )
 
