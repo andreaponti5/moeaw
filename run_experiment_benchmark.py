@@ -14,7 +14,7 @@ parser = argparse.ArgumentParser(
     prog="MOEAW",
     description="Run experiments"
 )
-parser.add_argument("-a", "--algorithm", type=str, default="NSGA2")
+parser.add_argument("-a", "--algorithm", type=str, default="MOEAD")
 parser.add_argument("-p", "--problem", type=str, default="DLTZ2")
 parser.add_argument("-t", "--trial", type=int, default=10)
 

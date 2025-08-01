@@ -1,0 +1,8 @@
+{
+  "MovieLens1k": {
+    "n_obj": [3],
+    "n_gen": [1000],
+    "n_partitions": [10],
+    "k": [25]
+  }
+}
