@@ -1,4 +1,4 @@
-# 🐜 MOEAW: Multi-Objective Evolutionary Algorithms
+# 🐜 Multi-Objective Evolutionary Algorithms with Wasserstein
 
 **MOEAW** is a research-oriented Python project that allows you to experiment with multiple **multi-objective evolutionary algorithms** on both benchmark functions and real-world problems such as:
 
