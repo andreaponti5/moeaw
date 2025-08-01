@@ -32,10 +32,12 @@ def identify_pareto(objectives):
 
 class WSelection(Selection):
 
-    def __init__(self, cloud_key="F"):
+    def __init__(self, cloud_keys=None):
         # Init usefull variable to optimize the computations
         super().__init__()
-        self.cloud_key = cloud_key
+        if cloud_keys is None:
+            cloud_keys = ["F"]
+        self.cloud_keys = cloud_keys
 
     def _do(self, problem, pop, n_select, n_parents, **kwargs):
         # Number of random individuals needed
@@ -80,11 +82,16 @@ class WSelection(Selection):
                                  method='smaller_is_better', return_random_if_equal=True))
             # Both solutions are feasible
             else:
-                parents1_cloud = pop[parents1].get(self.cloud_key)
-                parents2_cloud = pop[parents2].get(self.cloud_key)
-                parents1_ws = wasserstein_distance(parents1_cloud[0], parents1_cloud[1])
-                parents2_ws = wasserstein_distance(parents2_cloud[0], parents2_cloud[1])
-                # Compare the two pair of parents and get the best (the one with higher distance)
+                parents1_ws = 0
+                parents2_ws = 0
+                for key in self.cloud_keys:
+                    parents1_cloud = pop[parents1].get(key)
+                    parents2_cloud = pop[parents2].get(key)
+                    parents1_ws += wasserstein_distance(parents1_cloud[0], parents1_cloud[1])
+                    parents2_ws += wasserstein_distance(parents2_cloud[0], parents2_cloud[1])
+                parents1_ws = parents1_ws / len(self.cloud_keys)
+                parents2_ws = parents2_ws / len(self.cloud_keys)
+                # Compare the two pairs of parents and get the best (the one with higher distance)
                 winner = compare(parents1, parents1_ws, parents2, parents2_ws, method='larger_is_better',
                                  return_random_if_equal=True)
                 S.append(winner)

@@ -1,0 +1,30 @@
+{
+  "Anytown": {
+    "n_obj": [2, 4],
+    "n_var": [25, 25],
+    "n_gen": [500, 500],
+    "n_partitions": [24, 4],
+    "budget": [4, 4]
+  },
+  "Hanoi": {
+    "n_obj": [2, 4],
+    "n_var": [32, 32],
+    "n_gen": [500, 500],
+    "n_partitions": [24, 4],
+    "budget": [4, 4]
+  },
+  "Apulian5": {
+    "n_obj": [2, 4],
+    "n_var": [63, 63],
+    "n_gen": [750, 750],
+    "n_partitions": [24, 4],
+    "budget": [8, 8]
+  },
+  "Neptun": {
+    "n_obj": [2, 4],
+    "n_var": [333, 333],
+    "n_gen": [1000, 1000],
+    "n_partitions": [24, 4],
+    "budget": [25, 25]
+  }
+}
